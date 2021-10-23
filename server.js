@@ -1,11 +1,15 @@
 const express = require('express');
 //Route for front-end to request data 
 const { animals } = require('./data/animals.json');
+
+//Use process.env.PORT to setup app and prevent application error
+const PORT = process.env.PORT || 3001;
+
 //Instantiate server
 const app = express();
 
 //Make server listen for requests
-app.listen(3001, () => {
+app.listen( PORT, () => {
     console.log(`API server now on port 3001!`)
 });
 
