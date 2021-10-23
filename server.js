@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 
 //Make server listen for requests
-app.listen( PORT, () => {
+app.listen(PORT, () => {
     console.log(`API server now on port 3001!`)
 });
 
@@ -53,6 +53,11 @@ function filterByQuery(query, animalsArray) {
     return filteredResults;
 }
 
+function findById(id, animalsArray) {
+    const result = animalsArray.filter(animal => animal.id === id)[0];
+    return result;
+}
+
 //Add route to delpoy json data
 app.get('/api/animals', (req, res) => {
     let results = animals;
@@ -61,3 +66,14 @@ app.get('/api/animals', (req, res) => {
     };
     res.json(results);
 });
+
+//Route for animals
+app.get('/api/animals/:id', (req, res) => {
+    const result = findById(req.params.id, animals);
+    if (result) {
+        res.json(result);
+    }
+    else {
+        res.send(404);
+    }
+})
